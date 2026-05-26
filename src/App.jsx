@@ -9,7 +9,7 @@ import {
 const bannerImages = [
   {
     url: '/assets/ZIPMODELS/WhatsApp Image 2026-05-25 at 4.50.46 PM.jpeg',
-    pre: 'SJJPL',
+    pre: 'SHREE JEWELLERS JAMSHEDPUR',
     presents: 'PRESENTS',
     line1: 'A',
     line2: 'Lifetime',
@@ -19,7 +19,7 @@ const bannerImages = [
   },
   {
     url: '/assets/ZIPMODELS/WhatsApp Image 2026-05-25 at 4.50.46 PM (1).jpeg',
-    pre: 'SJJPL',
+    pre: 'SHREE JEWELLERS JAMSHEDPUR',
     presents: 'PRESENTS',
     line1: 'THE',
     line2: 'Bridal',
@@ -29,7 +29,7 @@ const bannerImages = [
   },
   {
     url: '/assets/ZIPMODELS/WhatsApp Image 2026-05-25 at 4.50.47 PM.jpeg',
-    pre: 'SJJPL',
+    pre: 'SHREE JEWELLERS JAMSHEDPUR',
     presents: 'PRESENTS',
     line1: 'AN',
     line2: 'Eternal',
@@ -39,7 +39,7 @@ const bannerImages = [
   },
   {
     url: '/assets/ZIPMODELS/WhatsApp Image 2026-05-25 at 4.50.47 PM (1).jpeg',
-    pre: 'SJJPL',
+    pre: 'SHREE JEWELLERS JAMSHEDPUR',
     presents: 'PRESENTS',
     line1: 'THE',
     line2: 'Royal',
