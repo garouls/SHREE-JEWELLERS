@@ -229,15 +229,12 @@ export default function App() {
   const [likedProducts, setLikedProducts] = useState({});
 
   // Live Gold Rates & Admin Panel State
-  const [goldRates, setGoldRates] = useState(() => {
-    const saved = localStorage.getItem('shree_gold_rates');
-    return saved ? JSON.parse(saved) : {
-      gold24k: 7650,
-      gold22k: 7015,
-      gold18k: 5740,
-      silver: 92,
-      lastUpdated: new Date().toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true })
-    };
+  const [goldRates, setGoldRates] = useState({
+    gold24k: 7650,
+    gold22k: 7015,
+    gold18k: 5740,
+    silver: 92,
+    lastUpdated: new Date().toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true })
   });
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isAuthed, setIsAuthed] = useState(false);
@@ -250,9 +247,9 @@ export default function App() {
   const [temp18k, setTemp18k] = useState(goldRates.gold18k);
   const [tempSilver, setTempSilver] = useState(goldRates.silver);
 
-  // Load public rates from rates.json on startup
+  // Load public rates from rates.json on startup (with cache-busting timestamp)
   useEffect(() => {
-    fetch('/assets/rates.json')
+    fetch(`/assets/rates.json?t=${Date.now()}`)
       .then(res => res.json())
       .then(data => {
         if (data && data.gold24k) {
@@ -333,7 +330,6 @@ export default function App() {
     };
 
     setGoldRates(newRates);
-    localStorage.setItem('shree_gold_rates', JSON.stringify(newRates));
 
     // AUTOMATIC GITHUB UPDATE PIPELINE
     const token = import.meta.env.VITE_GITHUB_TOKEN;
