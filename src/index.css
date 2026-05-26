@@ -960,7 +960,8 @@ body {
   flex-wrap: nowrap;
   gap: 0;
   width: max-content;
-  animation: categoryMarqueeLeft 60s linear infinite;
+  animation: categoryMarqueeLeft 120s linear infinite;
+  animation-delay: 60s;
   padding: 16px 10px;
 }
 
@@ -1117,6 +1118,13 @@ body {
   aspect-ratio: 1 / 1;
   background: #ffffff;
   padding: 12px;
+}
+@media (min-width: 1024px) {
+  .product-image-outer {
+    padding: 8px;
+    max-width: 240px;
+    max-height: 240px;
+  }
 }
 
 .product-image-inner {
@@ -1347,7 +1355,8 @@ body {
   flex-wrap: nowrap;
   gap: 0;
   width: max-content;
-  animation: marqueeLeft 80s linear infinite;
+  animation: marqueeLeft 180s linear infinite;
+  animation-delay: 60s;
   padding: 10px 0;
 }
 
