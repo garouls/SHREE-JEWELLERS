@@ -957,9 +957,10 @@ body {
 
 .categories-marquee-row {
   display: flex;
+  flex-wrap: nowrap;
   gap: 0;
   width: max-content;
-  animation: categoryMarqueeLeft 25s linear infinite;
+  animation: categoryMarqueeLeft 60s linear infinite;
   padding: 16px 10px;
 }
 
@@ -969,6 +970,7 @@ body {
 
 .categories-marquee-row .category-card {
   flex: 0 0 260px;
+  flex-shrink: 0;
   margin-right: 32px;
 }
 
@@ -1342,9 +1344,10 @@ body {
 
 .models-marquee-row {
   display: flex;
+  flex-wrap: nowrap;
   gap: 0;
   width: max-content;
-  animation: marqueeLeft 30s linear infinite;
+  animation: marqueeLeft 80s linear infinite;
   padding: 10px 0;
 }
 
@@ -1354,6 +1357,7 @@ body {
 
 .model-marquee-card {
   flex: 0 0 320px;
+  flex-shrink: 0;
   margin-right: 16px;
   aspect-ratio: 2 / 3;
   overflow: hidden;
