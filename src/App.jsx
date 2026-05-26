@@ -229,12 +229,16 @@ export default function App() {
   const [likedProducts, setLikedProducts] = useState({});
 
   // Live Gold Rates & Admin Panel State
-  const [goldRates, setGoldRates] = useState({
-    gold24k: 7650,
-    gold22k: 7015,
-    gold18k: 5740,
-    silver: 92,
-    lastUpdated: new Date().toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true })
+  const [goldRates, setGoldRates] = useState(() => {
+    const saved = localStorage.getItem('shree_gold_rates');
+    return saved ? JSON.parse(saved) : {
+      gold24k: 7650,
+      gold22k: 7015,
+      gold18k: 5740,
+      silver: 92,
+      lastUpdated: new Date().toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true }),
+      updatedAt: 1716700000000 // default baseline timestamp
+    };
   });
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isAuthed, setIsAuthed] = useState(false);
@@ -253,7 +257,13 @@ export default function App() {
       .then(res => res.json())
       .then(data => {
         if (data && data.gold24k) {
-          setGoldRates(data);
+          const saved = localStorage.getItem('shree_gold_rates');
+          const localData = saved ? JSON.parse(saved) : null;
+          // If no local storage data, or the server file has a newer timestamp than local storage
+          if (!localData || !localData.updatedAt || data.updatedAt > localData.updatedAt) {
+            setGoldRates(data);
+            localStorage.setItem('shree_gold_rates', JSON.stringify(data));
+          }
         }
       })
       .catch(err => console.error("Error fetching live public rates:", err));
@@ -326,10 +336,12 @@ export default function App() {
       gold22k: Number(temp22k),
       gold18k: Number(temp18k),
       silver: Number(tempSilver),
-      lastUpdated: now
+      lastUpdated: now,
+      updatedAt: Date.now()
     };
 
     setGoldRates(newRates);
+    localStorage.setItem('shree_gold_rates', JSON.stringify(newRates));
 
     // AUTOMATIC GITHUB UPDATE PIPELINE
     const token = import.meta.env.VITE_GITHUB_TOKEN;
