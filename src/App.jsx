@@ -309,8 +309,7 @@ export default function App() {
   // Admin login and update logic
   const handleAdminLogin = (e) => {
     e.preventDefault();
-    const envPasscode = import.meta.env.VITE_ADMIN_PASSCODE || 'umang@12';
-    if (passcode === envPasscode || passcode === '1234') {
+    if (passcode === 'umang@12') {
       setIsAuthed(true);
       setErrorMsg('');
       setTemp24k(goldRates.gold24k);
