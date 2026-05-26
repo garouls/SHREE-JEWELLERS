@@ -442,7 +442,7 @@ export default function App() {
           {/* Logo Brand Title */}
           <a href="#" className="nav-brand" style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <img 
-              src="/assets/logo.png" 
+              src="/assets/logo.png?v=2" 
               alt="KN Jewellers Logo" 
               className="brand-logo-img" 
               style={{ width: '48px', height: 'auto', objectFit: 'contain' }}
@@ -936,7 +936,7 @@ export default function App() {
                   <div className="info-card-text">
                     <h4 className="info-card-label">Our Showroom Address</h4>
                     <p className="info-card-value">
-                      96, Bazaar, next to Jayant Watch Co, SNP Area, Sakchi, AMBALA CANTT, Jharkhand 831001
+                      AMBALA CANTT, Haryana
                     </p>
                     <a href="https://share.google/VnrhhUUApUIdZ6PC9" target="_blank" rel="noreferrer" className="whatsapp-link" style={{ marginTop: '4px', fontSize: '11px', display: 'inline-block' }}>
                       VIEW ON GOOGLE MAPS &rarr;
@@ -1045,7 +1045,7 @@ export default function App() {
         <div className="footer-inner">
           <div className="footer-brand">
             <span className="footer-brand-title">KN JEWELLERS</span>
-            <span className="footer-brand-sub">SAKCHI, AMBALA CANTT</span>
+            <span className="footer-brand-sub">AMBALA CANTT</span>
           </div>
 
           <div className="footer-links">
