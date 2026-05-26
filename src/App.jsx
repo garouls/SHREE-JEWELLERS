@@ -443,7 +443,7 @@ export default function App() {
           <a href="#" className="nav-brand" style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <img 
               src="/assets/logo.png" 
-              alt="KN JEWELLERS Logo" 
+              alt="KN Jewellers Logo" 
               className="brand-logo-img" 
               style={{ width: '48px', height: 'auto', objectFit: 'contain' }}
             />
