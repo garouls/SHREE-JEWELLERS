@@ -1,5 +1,8 @@
 # React + Vite
 
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/garouls/SHREE-JEWELLERS)
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
