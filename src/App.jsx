@@ -302,7 +302,8 @@ export default function App() {
   // Admin login and update logic
   const handleAdminLogin = (e) => {
     e.preventDefault();
-    if (passcode === 'SHREE2026' || passcode === '1234') {
+    const envPasscode = import.meta.env.VITE_ADMIN_PASSCODE || 'SHREE2026';
+    if (passcode === envPasscode || passcode === '1234') {
       setIsAuthed(true);
       setErrorMsg('');
       setTemp24k(goldRates.gold24k);
@@ -335,9 +336,7 @@ export default function App() {
     localStorage.setItem('shree_gold_rates', JSON.stringify(newRates));
 
     // AUTOMATIC GITHUB UPDATE PIPELINE
-    const token_part1 = 'ghp_';
-    const token_part2 = 'KmkW6KIQPWXTu2hjqrkpG76QuC1rND0pO77P';
-    const token = token_part1 + token_part2;
+    const token = import.meta.env.VITE_GITHUB_TOKEN;
     const repo = 'garouls/SHREE-JEWELLERS';
     const path = 'public/assets/rates.json';
     const url = `https://api.github.com/repos/${repo}/contents/${path}`;
