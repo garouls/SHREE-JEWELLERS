@@ -1740,3 +1740,203 @@ body {
   font-size: 9px;
   font-weight: 500;
 }
+
+/* ==========================================================================
+   Live Gold & Silver Rates Ticker Bar
+   ========================================================================== */
+.gold-ticker-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 36px;
+  background: linear-gradient(90deg, #3b0a14 0%, #5c1626 50%, #3b0a14 100%);
+  color: #ffffff;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  font-family: var(--font-sans);
+  border-bottom: 1.5px solid var(--royal-gold);
+}
+
+.ticker-content-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-items {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: max-content;
+  animation: tickerScroll 25s linear infinite;
+}
+
+.ticker-live-dot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(225, 37, 27, 0.2);
+  color: #ff4d4d;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 8px;
+  border: 1px solid #ff4d4d;
+}
+
+.ping-dot {
+  width: 6px;
+  height: 6px;
+  background: #ff4d4d;
+  border-radius: 50%;
+  animation: ping 1.5s infinite;
+}
+
+@keyframes ping {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0.5; }
+}
+
+.ticker-item {
+  color: #f6f2e8;
+  font-size: 10px;
+}
+
+.ticker-item strong {
+  color: var(--royal-gold);
+  font-weight: 700;
+}
+
+.ticker-item-separator {
+  color: var(--royal-gold);
+  font-size: 14px;
+}
+
+/* Adjust Main Header and Container offsets for fixed Ticker */
+.header-main {
+  top: 36px !important;
+}
+
+.app-container {
+  padding-top: 36px !important;
+}
+
+/* ==========================================================================
+   Admin Panel Modal Controls
+   ========================================================================== */
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.admin-modal-content {
+  background: var(--ivory-bg);
+  border: 1.5px solid var(--royal-gold);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+  box-shadow: var(--box-shadow-luxury);
+  position: relative;
+  color: var(--text-dark);
+}
+
+.admin-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.admin-modal-close:hover {
+  color: var(--burgundy);
+}
+
+.admin-form-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--burgundy);
+  margin-bottom: 24px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.admin-form-group {
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.admin-form-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.admin-form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--royal-gold-border);
+  background: #ffffff;
+  border-radius: 4px;
+  font-size: 14px;
+  color: var(--text-dark);
+  font-family: var(--font-sans);
+}
+
+.admin-form-input:focus {
+  outline: none;
+  border-color: var(--royal-gold);
+}
+
+.admin-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--royal-gold);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  margin-top: 12px;
+  text-transform: uppercase;
+}
+
+.admin-submit-btn:hover {
+  background: var(--royal-gold-hover);
+}
+
+.admin-error-msg {
+  color: #ff4d4d;
+  font-size: 11px;
+  margin-top: 8px;
+  text-align: center;
+}

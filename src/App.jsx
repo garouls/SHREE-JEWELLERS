@@ -228,6 +228,27 @@ export default function App() {
   const [activeModelSlide, setActiveModelSlide] = useState(0);
   const [likedProducts, setLikedProducts] = useState({});
 
+  // Live Gold Rates & Admin Panel State
+  const [goldRates, setGoldRates] = useState(() => {
+    const saved = localStorage.getItem('shree_gold_rates');
+    return saved ? JSON.parse(saved) : {
+      gold24k: 7650,
+      gold22k: 7015,
+      gold18k: 5740,
+      silver: 92
+    };
+  });
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isAuthed, setIsAuthed] = useState(false);
+  const [passcode, setPasscode] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  
+  // Rate Edit Form States
+  const [temp24k, setTemp24k] = useState(goldRates.gold24k);
+  const [temp22k, setTemp22k] = useState(goldRates.gold22k);
+  const [temp18k, setTemp18k] = useState(goldRates.gold18k);
+  const [tempSilver, setTempSilver] = useState(goldRates.silver);
+
   // Auto-advance banner carousel
   useEffect(() => {
     const timer = setInterval(() => {
@@ -265,6 +286,41 @@ export default function App() {
     }
   };
 
+  // Admin login and update logic
+  const handleAdminLogin = (e) => {
+    e.preventDefault();
+    if (passcode === 'SHREE2026' || passcode === '1234') {
+      setIsAuthed(true);
+      setErrorMsg('');
+      setTemp24k(goldRates.gold24k);
+      setTemp22k(goldRates.gold22k);
+      setTemp18k(goldRates.gold18k);
+      setTempSilver(goldRates.silver);
+    } else {
+      setErrorMsg('Incorrect passcode! Please try again.');
+    }
+  };
+
+  const handleSaveRates = (e) => {
+    e.preventDefault();
+    const newRates = {
+      gold24k: Number(temp24k),
+      gold22k: Number(temp22k),
+      gold18k: Number(temp18k),
+      silver: Number(tempSilver)
+    };
+    setGoldRates(newRates);
+    localStorage.setItem('shree_gold_rates', JSON.stringify(newRates));
+    setIsAdminOpen(false);
+    alert('Live Gold & Silver rates updated successfully!');
+  };
+
+  const handleAdminLogout = () => {
+    setIsAuthed(false);
+    setPasscode('');
+    setErrorMsg('');
+  };
+
   // Filter products based on selected tab
   const filteredProducts = activeCategory === 'ALL' 
     ? allProducts 
@@ -272,6 +328,36 @@ export default function App() {
 
   return (
     <div className="app-container">
+      
+      {/* Animated Live Gold Rates Ticker Bar */}
+      <div className="gold-ticker-bar">
+        <div className="ticker-content-wrapper">
+          <div className="ticker-items">
+            <span className="ticker-live-dot">
+              <span className="ping-dot"></span>
+              LIVE RATE
+            </span>
+            <span className="ticker-item" style={{ fontWeight: 700, color: 'var(--royal-gold)' }}>SHREE JEWELLERS:</span>
+            <span className="ticker-item">24K GOLD: <strong>₹{goldRates.gold24k}/g</strong></span>
+            <span className="ticker-item-separator">•</span>
+            <span className="ticker-item">22K GOLD: <strong>₹{goldRates.gold22k}/g</strong></span>
+            <span className="ticker-item-separator">•</span>
+            <span className="ticker-item">18K GOLD: <strong>₹{goldRates.gold18k}/g</strong></span>
+            <span className="ticker-item-separator">•</span>
+            <span className="ticker-item">SILVER: <strong>₹{goldRates.silver}/g</strong></span>
+            
+            {/* Duplicated loop for infinite scrolling marquee */}
+            <span className="ticker-item-separator" style={{ margin: '0 20px' }}>★</span>
+            <span className="ticker-item">24K GOLD: <strong>₹{goldRates.gold24k}/g</strong></span>
+            <span className="ticker-item-separator">•</span>
+            <span className="ticker-item">22K GOLD: <strong>₹{goldRates.gold22k}/g</strong></span>
+            <span className="ticker-item-separator">•</span>
+            <span className="ticker-item">18K GOLD: <strong>₹{goldRates.gold18k}/g</strong></span>
+            <span className="ticker-item-separator">•</span>
+            <span className="ticker-item">SILVER: <strong>₹{goldRates.silver}/g</strong></span>
+          </div>
+        </div>
+      </div>
       
       {/* 1. Header & Navigation */}
       <header className="header-main">
@@ -892,6 +978,8 @@ export default function App() {
             <a href="#" className="footer-link-item">TERMS OF USE</a>
             <span className="footer-separator">•</span>
             <a href="#" className="footer-link-item">BIS HALLMARKING POLICY</a>
+            <span className="footer-separator">•</span>
+            <button onClick={() => { setIsAdminOpen(true); handleAdminLogout(); }} className="footer-link-item" style={{ background: 'none', border: 'none', cursor: 'pointer', font: 'inherit', padding: 0, color: 'var(--royal-gold)', fontWeight: 'bold' }}>ADMIN PANEL</button>
           </div>
 
           <div className="footer-socials">
@@ -910,6 +998,101 @@ export default function App() {
           &copy; {new Date().getFullYear()} Shree Jewellers Jamshedpur. All Rights Reserved. Pure BIS Hallmarked Gold & Certified Diamonds.
         </div>
       </footer>
+
+      {/* 9. Admin Panel Modal Overlay */}
+      {isAdminOpen && (
+        <div className="admin-modal-overlay">
+          <div className="admin-modal-content">
+            <button 
+              className="admin-modal-close" 
+              onClick={() => setIsAdminOpen(false)}
+              aria-label="Close Admin Panel"
+            >
+              <X className="icon-md" />
+            </button>
+
+            {!isAuthed ? (
+              /* Passcode Screen */
+              <form onSubmit={handleAdminLogin}>
+                <h3 className="admin-form-title">ADMIN SECURITY LOGIN</h3>
+                <div className="admin-form-group">
+                  <label className="admin-form-label">Enter Passcode</label>
+                  <input 
+                    type="password" 
+                    required 
+                    className="admin-form-input" 
+                    placeholder="Enter admin passcode"
+                    value={passcode}
+                    onChange={(e) => setPasscode(e.target.value)}
+                  />
+                  {errorMsg && <p className="admin-error-msg">{errorMsg}</p>}
+                  <p style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '8px', textAlign: 'center' }}>Passcode is 1234 or SHREE2026</p>
+                </div>
+                <button type="submit" className="admin-submit-btn">ACCESS PANEL</button>
+              </form>
+            ) : (
+              /* Live Rates Dashboard Screen */
+              <form onSubmit={handleSaveRates}>
+                <h3 className="admin-form-title">LIVE RATES DASHBOARD</h3>
+                
+                <div className="admin-form-group">
+                  <label className="admin-form-label">24K Gold Rate (₹ per gram)</label>
+                  <input 
+                    type="number" 
+                    required 
+                    className="admin-form-input" 
+                    value={temp24k}
+                    onChange={(e) => setTemp24k(e.target.value)}
+                  />
+                </div>
+
+                <div className="admin-form-group">
+                  <label className="admin-form-label">22K Gold Rate (₹ per gram)</label>
+                  <input 
+                    type="number" 
+                    required 
+                    className="admin-form-input" 
+                    value={temp22k}
+                    onChange={(e) => setTemp22k(e.target.value)}
+                  />
+                </div>
+
+                <div className="admin-form-group">
+                  <label className="admin-form-label">18K Gold Rate (₹ per gram)</label>
+                  <input 
+                    type="number" 
+                    required 
+                    className="admin-form-input" 
+                    value={temp18k}
+                    onChange={(e) => setTemp18k(e.target.value)}
+                  />
+                </div>
+
+                <div className="admin-form-group">
+                  <label className="admin-form-label">Silver Rate (₹ per gram)</label>
+                  <input 
+                    type="number" 
+                    required 
+                    className="admin-form-input" 
+                    value={tempSilver}
+                    onChange={(e) => setTempSilver(e.target.value)}
+                  />
+                </div>
+
+                <button type="submit" className="admin-submit-btn">PUBLISH LIVE RATES</button>
+                <button 
+                  type="button" 
+                  onClick={handleAdminLogout} 
+                  className="admin-submit-btn"
+                  style={{ background: 'transparent', border: '1px solid var(--royal-gold)', color: 'var(--royal-gold)', marginTop: '8px' }}
+                >
+                  LOG OUT
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
 
     </div>
   );
