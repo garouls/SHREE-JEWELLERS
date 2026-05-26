@@ -299,7 +299,7 @@ export default function App() {
   // Admin login and update logic
   const handleAdminLogin = (e) => {
     e.preventDefault();
-    const envPasscode = import.meta.env.VITE_ADMIN_PASSCODE || 'SHREE2026';
+    const envPasscode = import.meta.env.VITE_ADMIN_PASSCODE || 'umang@12';
     if (passcode === envPasscode || passcode === '1234') {
       setIsAuthed(true);
       setErrorMsg('');
