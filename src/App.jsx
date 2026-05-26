@@ -235,7 +235,8 @@ export default function App() {
       gold24k: 7650,
       gold22k: 7015,
       gold18k: 5740,
-      silver: 92
+      silver: 92,
+      lastUpdated: new Date().toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true })
     };
   });
   const [isAdminOpen, setIsAdminOpen] = useState(false);
@@ -303,11 +304,19 @@ export default function App() {
 
   const handleSaveRates = (e) => {
     e.preventDefault();
+    const now = new Date().toLocaleString('en-IN', { 
+      day: 'numeric', 
+      month: 'short', 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      hour12: true 
+    });
     const newRates = {
       gold24k: Number(temp24k),
       gold22k: Number(temp22k),
       gold18k: Number(temp18k),
-      silver: Number(tempSilver)
+      silver: Number(tempSilver),
+      lastUpdated: now
     };
     setGoldRates(newRates);
     localStorage.setItem('shree_gold_rates', JSON.stringify(newRates));
@@ -345,6 +354,8 @@ export default function App() {
             <span className="ticker-item">18K GOLD: <strong>₹{goldRates.gold18k}/g</strong></span>
             <span className="ticker-item-separator">•</span>
             <span className="ticker-item">SILVER: <strong>₹{goldRates.silver}/g</strong></span>
+            <span className="ticker-item-separator">•</span>
+            <span className="ticker-item" style={{ color: 'var(--royal-gold)', fontWeight: 500, fontSize: '9px' }}>[UPDATED: {goldRates.lastUpdated}]</span>
             
             {/* Duplicated loop for infinite scrolling marquee */}
             <span className="ticker-item-separator" style={{ margin: '0 20px' }}>★</span>
@@ -355,6 +366,8 @@ export default function App() {
             <span className="ticker-item">18K GOLD: <strong>₹{goldRates.gold18k}/g</strong></span>
             <span className="ticker-item-separator">•</span>
             <span className="ticker-item">SILVER: <strong>₹{goldRates.silver}/g</strong></span>
+            <span className="ticker-item-separator">•</span>
+            <span className="ticker-item" style={{ color: 'var(--royal-gold)', fontWeight: 500, fontSize: '9px' }}>[UPDATED: {goldRates.lastUpdated}]</span>
           </div>
         </div>
       </div>
@@ -1026,7 +1039,6 @@ export default function App() {
                     onChange={(e) => setPasscode(e.target.value)}
                   />
                   {errorMsg && <p className="admin-error-msg">{errorMsg}</p>}
-                  <p style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '8px', textAlign: 'center' }}>Passcode is 1234 or SHREE2026</p>
                 </div>
                 <button type="submit" className="admin-submit-btn">ACCESS PANEL</button>
               </form>
