@@ -250,6 +250,18 @@ export default function App() {
   const [temp18k, setTemp18k] = useState(goldRates.gold18k);
   const [tempSilver, setTempSilver] = useState(goldRates.silver);
 
+  // Load public rates from rates.json on startup
+  useEffect(() => {
+    fetch('/assets/rates.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.gold24k) {
+          setGoldRates(data);
+        }
+      })
+      .catch(err => console.error("Error fetching live public rates:", err));
+  }, []);
+
   // Auto-advance banner carousel
   useEffect(() => {
     const timer = setInterval(() => {
@@ -1091,7 +1103,10 @@ export default function App() {
                   />
                 </div>
 
-                <button type="submit" className="admin-submit-btn">PUBLISH LIVE RATES</button>
+                <button type="submit" className="admin-submit-btn">SAVE LOCAL RATES</button>
+                <p style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '12px', textAlign: 'center', lineHeight: '1.4' }}>
+                  <strong>Note:</strong> To update rates <strong>publicly for everyone</strong>, simply text your AI Assistant: <em>"Update gold rates to 24k: XXX, 22k: XXX, etc."</em>. I will instantly push the update live to your GitHub and Vercel!
+                </p>
                 <button 
                   type="button" 
                   onClick={handleAdminLogout} 
