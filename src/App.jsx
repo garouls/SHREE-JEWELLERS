@@ -5,11 +5,11 @@ import {
 } from 'lucide-react';
 
 
-// Banners customized for KN JEWELLERS exact layout using Model Images
+// Banners customized for VASNANI JEWELLERS exact layout using Model Images
 const bannerImages = [
   {
     url: '/assets/ZIPMODELS/WhatsApp Image 2026-05-25 at 4.50.46 PM.jpeg',
-    pre: 'KN JEWELLERS AMBALA CANTT',
+    pre: 'VASNANI JEWELLERS AMBALA CANTT',
     presents: 'PRSENTS',
     line1: 'A',
     line2: 'Lifetime',
@@ -19,7 +19,7 @@ const bannerImages = [
   },
   {
     url: '/assets/ZIPMODELS/WhatsApp Image 2026-05-25 at 4.50.46 PM (1).jpeg',
-    pre: 'KN JEWELLERS AMBALA CANTT',
+    pre: 'VASNANI JEWELLERS AMBALA CANTT',
     presents: 'PRSENTS',
     line1: 'THE',
     line2: 'Bridal',
@@ -29,7 +29,7 @@ const bannerImages = [
   },
   {
     url: '/assets/ZIPMODELS/WhatsApp Image 2026-05-25 at 4.50.47 PM.jpeg',
-    pre: 'KN JEWELLERS AMBALA CANTT',
+    pre: 'VASNANI JEWELLERS AMBALA CANTT',
     presents: 'PRSENTS',
     line1: 'AN',
     line2: 'Eternal',
@@ -39,7 +39,7 @@ const bannerImages = [
   },
   {
     url: '/assets/ZIPMODELS/WhatsApp Image 2026-05-25 at 4.50.47 PM (1).jpeg',
-    pre: 'KN JEWELLERS AMBALA CANTT',
+    pre: 'VASNANI JEWELLERS AMBALA CANTT',
     presents: 'PRSENTS',
     line1: 'THE',
     line2: 'Royal',
@@ -230,7 +230,7 @@ export default function App() {
 
   // Live Gold Rates & Admin Panel State
   const [goldRates, setGoldRates] = useState(() => {
-    const saved = localStorage.getItem('KN_gold_rates');
+    const saved = localStorage.getItem('VASNANI_gold_rates');
     return saved ? JSON.parse(saved) : {
       gold24k: 7650,
       gold22k: 7015,
@@ -257,12 +257,12 @@ export default function App() {
       .then(res => res.json())
       .then(data => {
         if (data && data.gold24k) {
-          const saved = localStorage.getItem('KN_gold_rates');
+          const saved = localStorage.getItem('VASNANI_gold_rates');
           const localData = saved ? JSON.parse(saved) : null;
           // If no local storage data, or the server file has a newer timestamp than local storage
           if (!localData || !localData.updatedAt || data.updatedAt > localData.updatedAt) {
             setGoldRates(data);
-            localStorage.setItem('KN_gold_rates', JSON.stringify(data));
+            localStorage.setItem('VASNANI_gold_rates', JSON.stringify(data));
           }
         }
       })
@@ -340,11 +340,11 @@ export default function App() {
     };
 
     setGoldRates(newRates);
-    localStorage.setItem('KN_gold_rates', JSON.stringify(newRates));
+    localStorage.setItem('VASNANI_gold_rates', JSON.stringify(newRates));
 
     // AUTOMATIC GITHUB UPDATE PIPELINE
     const token = import.meta.env.VITE_GITHUB_TOKEN;
-    const repo = 'garouls/KN-JEWELLERS';
+    const repo = 'garouls/VASNANI-JEWELLERS';
     const path = 'public/assets/rates.json';
     const url = `https://api.github.com/repos/${repo}/contents/${path}`;
 
@@ -409,7 +409,7 @@ export default function App() {
               <span className="ping-dot"></span>
               LIVE RATE
             </span>
-            <span className="ticker-item" style={{ fontWeight: 700, color: 'var(--royal-gold)' }}>KN JEWELLERS:</span>
+            <span className="ticker-item" style={{ fontWeight: 700, color: 'var(--royal-gold)' }}>VASNANI JEWELLERS:</span>
             <span className="ticker-item">24K GOLD: <strong>₹{goldRates.gold24k}/g</strong></span>
             <span className="ticker-item-separator">•</span>
             <span className="ticker-item">22K GOLD: <strong>₹{goldRates.gold22k}/g</strong></span>
@@ -442,13 +442,13 @@ export default function App() {
           {/* Logo Brand Title */}
           <a href="#" className="nav-brand" style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <img 
-              src="/assets/logo.png?v=2" 
-              alt="KN Jewellers Logo" 
+              src="/assets/logo.png?v=3" 
+              alt="VASNANI JEWELLERS Logo" 
               className="brand-logo-img" 
               style={{ width: '48px', height: 'auto', objectFit: 'contain' }}
             />
             <div className="brand-text-container">
-              <span className="brand-name">KN JEWELLERS</span>
+              <span className="brand-name">VASNANI JEWELLERS</span>
               <span className="brand-subtitle">AMBALA CANTT</span>
             </div>
           </a>
@@ -632,7 +632,7 @@ export default function App() {
                   </div>
                   <div className="polaroid-caption">
                     <span className="caption-main">THE ROYAL JADAU HARAM</span>
-                    <span className="caption-sub">KN JEWELLERS Heritage</span>
+                    <span className="caption-sub">VASNANI JEWELLERS Heritage</span>
                   </div>
                 </div>
               </div>
@@ -834,7 +834,7 @@ export default function App() {
                         <Heart className="icon-sm" />
                       </button>
                       <a 
-                        href={`https://wa.me/917479931965?text=Hello%20KN%20Jewellers,%20I%20am%20interested%20in%20buying%20your%20${encodeURIComponent(product.title)}`}
+                        href={`https://wa.me/917479931965?text=Hello%20VASNANI%20Jewellers,%20I%20am%20interested%20in%20buying%20your%20${encodeURIComponent(product.title)}`}
                         target="_blank"
                         rel="noreferrer"
                         className="whatsapp-inquire-btn"
@@ -872,7 +872,7 @@ export default function App() {
                 We craft bespoke handcrafted pieces matching your specifications for {activeCategory}. Please contact our AMBALA CANTT showroom on WhatsApp to design your dream piece.
               </p>
               <a 
-                href="https://wa.me/917479931965?text=Hello%20KN%20Jewellers,%20I%20want%20to%20place%20a%20custom%20order." 
+                href="https://wa.me/917479931965?text=Hello%20VASNANI%20Jewellers,%20I%20want%20to%20place%20a%20custom%20order." 
                 target="_blank"
                 rel="noreferrer"
                 className="custom-order-link"
@@ -921,7 +921,7 @@ export default function App() {
             {/* Showroom info & Details */}
             <div className="contact-info-block">
               <h2 className="section-pretitle">VISIT OUR SHOWROOM</h2>
-              <h3 className="showroom-title">KN JEWELLERS</h3>
+              <h3 className="showroom-title">VASNANI JEWELLERS</h3>
               <p className="showroom-desc">
                 Step into a world of pure heritage gold and flawless diamonds. Our flagship showroom in AMBALA CANTT showcases one-of-a-kind bespoke bridal sets, beautiful light-weight items, and custom kada collections.
               </p>
@@ -968,7 +968,7 @@ export default function App() {
                     <a href="tel:+917479931965" className="info-card-phone-link">
                       +91 74799 31965 (Sakchi Main Line)
                     </a>
-                    <a href="https://wa.me/917479931965?text=Hello%20KN%20Jewellers,%20I%20have%20an%20inquiry%20regarding%20your%20collections." className="whatsapp-link" target="_blank" rel="noreferrer">
+                    <a href="https://wa.me/917479931965?text=Hello%20VASNANI%20Jewellers,%20I%20have%20an%20inquiry%20regarding%20your%20collections." className="whatsapp-link" target="_blank" rel="noreferrer">
                       CONNECT ON WHATSAPP &rarr;
                     </a>
                   </div>
@@ -1044,7 +1044,7 @@ export default function App() {
       <footer className="footer-main">
         <div className="footer-inner">
           <div className="footer-brand">
-            <span className="footer-brand-title">KN JEWELLERS</span>
+            <span className="footer-brand-title">VASNANI JEWELLERS</span>
             <span className="footer-brand-sub">AMBALA CANTT</span>
           </div>
 
@@ -1060,7 +1060,7 @@ export default function App() {
 
           <div className="footer-socials">
             <span className="social-label">FOLLOW US ON INSTAGRAM:</span>
-            <a href="https://www.instagram.com/KN_jewellers_jsr?igsh=OTdoa3lycHppZmg=" target="_blank" rel="noreferrer" className="instagram-circle-btn" aria-label="Instagram">
+            <a href="https://www.instagram.com/VASNANI_jewellers_jsr?igsh=OTdoa3lycHppZmg=" target="_blank" rel="noreferrer" className="instagram-circle-btn" aria-label="Instagram">
               <svg className="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
@@ -1071,7 +1071,7 @@ export default function App() {
         </div>
         
         <div className="footer-copyright">
-          &copy; {new Date().getFullYear()} KN JEWELLERS AMBALA CANTT. All Rights Reserved. Pure BIS Hallmarked Gold & Certified Diamonds.
+          &copy; {new Date().getFullYear()} VASNANI JEWELLERS AMBALA CANTT. All Rights Reserved. Pure BIS Hallmarked Gold & Certified Diamonds.
         </div>
       </footer>
 
